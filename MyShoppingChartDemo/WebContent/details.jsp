@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  <td>Made-in: <%=item.getCity()%></td>
                </tr>
                <tr>
-                 <td>Price: <%=item.getPrice() %>$</td>
+                 <td>Price: $<%=item.getPrice() %></td>
                </tr> 
              </table>
           </td>
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               if(cookies!=null&&cookies.length>0)
               {
 	              for(Cookie c:cookies)
-	              {
+	              {   System.out.println(c.getValue().toString());
 	                  if(c.getName().equals("ListViewCookie"))
 	                  {
 	                     list = c.getValue();
@@ -90,9 +90,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	              }
 	          }
               
-              list+=request.getParameter("id")+",";
+              list+=request.getParameter("id")+"#";
               //if the browse items exceed 1000, clear the list
-              String[] arr = list.split(",");
+              String[] arr = list.split("#");
               if(arr!=null&&arr.length>0)
               {
                   if(arr.length>=1000)
@@ -100,11 +100,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       list="";
                   }
               }
+          
               Cookie cookie = new Cookie("ListViewCookie",list);
+              System.out.println(cookie.getName());
               response.addCookie(cookie);
           
           %>
-          <td width="30%" bgcolor="#EEE" align="center">
+          <td width="30%" bgcolor="#D3D3D3" align="center">
              <br>
              <b>Browsed Items</b><br>
              <% 
@@ -122,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  <a href="details.jsp?id=<%=i.getId()%>"><img src="images/<%=i.getPicture() %>" width="120" height="90" border="1"/></a>
                </dt>
                <dd class="dd_name"><%=i.getName() %></dd> 
-               <dd class="dd_city">Made-in: <%=i.getCity() %>&nbsp;&nbsp;Price: <%=i.getPrice() %> $ </dd> 
+               <dd class="dd_city">Made-in: <%=i.getCity() %>&nbsp;&nbsp;Price:$<%=i.getPrice() %> </dd> 
              </dl>
              </div>
              <% 

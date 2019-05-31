@@ -140,13 +140,13 @@ public class ItemsDAO {
 		int count = 5;
 		
 		if( list!=null && !list.equals("")) {
-			String[] listItem = list.split(",");
-			int len = 0;
+			String[] listItem = list.split("#");
+			int len = listItem.length;
 			while(count>0) {
+				len--;
 				Items item = getItemsById(Integer.parseInt(listItem[len]));
 				vList.add(item);				
-				len++;
-				if(len == listItem.length) {
+				if(len == 0) {
 					break;
 				}
 				count--; 
