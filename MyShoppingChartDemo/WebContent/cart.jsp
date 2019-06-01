@@ -18,11 +18,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <link type="text/css" rel="stylesheet" href="css/style1.css" />
     <script language="javascript">
-	    function delcfm() {
-	        if (!confirm("Confirm to delete?")) {
-	            window.event.returnValue = false;
-	        }
-	    }
+     function delcfm() {
+
+        if (!confirm("Confirm to update?")) {
+            window.event.returnValue = false;
+        }
+     }
+      function add(id)
+      {
+         var num = parseInt(document.getElementById("product_num_"+id).value);
+         if(num<100)
+         {
+            document.getElementById("product_num_"+id).value = ++num;
+         }
+      }
+      function sub(id)
+      {
+         var num = parseInt(document.getElementById("product_num_"+id).value);
+         if(num>1)
+         {
+            document.getElementById("product_num_"+id).value = --num;
+         }
+      }
+      function updateItemNum(id){
+    	  var num = document.getElementById("product_num_"+id).value;
+    	  alert(num);
+    	  window.location.href = "http://www.w3schools.com";
+      }
    </script>
   </head>
   
@@ -58,10 +80,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden" value="" />
 					</td>
 					<td class="number">
-                     	<%=bi.getItemNum()%>					
-					</td>                        
+                     	<span id="sub" onclick="sub(<%=bi.getId()%>);">-</span><input type="text" id="product_num_<%=bi.getId()%>" name="product_num_<%=bi.getId()%>" value="<%=bi.getItemNum()%>" size="2"/><span id="add" onclick="add(<%=bi.getId()%>);">+</span>					
+					</td>                         
                     <td class="delete">
-					  <a href="servlet/CartServlet?action=delete&id=<%=bi.getId()%>" onclick="delcfm();">Delete</a>					                  
+					  <a href="javascript:updateItemNum(<%=bi.getId()%>)" onclick="delcfm();">Update</a>					                  
 					</td>
 				</tr>
 				     <% 

@@ -50,6 +50,11 @@ public class CartServlet extends HttpServlet {
 				request.getRequestDispatcher("/cart.jsp").forward(request, response);
 			
 			}
+			
+			if(action.equals("delete")) {
+				String id = request.getParameter("id");
+			
+			}
 		
 		}
 		
@@ -79,17 +84,26 @@ public class CartServlet extends HttpServlet {
 				isSuccessful = sc.addItems(id);
 				num--;				
 			}
-			ArrayList<BoughtItem> bi = sc.getItemList();
-	    	for(BoughtItem i:bi) {
-	    		System.out.println(i.getName()+" "+i.getItemNum()+" "+i.getPrice());
-	    	}
-	    	System.out.println(sc.sumItemPrice());
+//			ArrayList<BoughtItem> bi = sc.getItemList();
+//	    	for(BoughtItem i:bi) {
+//	    		System.out.println(i.getName()+" "+i.getItemNum()+" "+i.getPrice());
+//	    	}
+//	    	System.out.println(sc.sumItemPrice());
 			return isSuccessful;
 		}else {
 			return isSuccessful;
-		}
-		
+		}		
 	
+	}
+	
+	private boolean deleteItems(HttpServletRequest request, HttpServletResponse response) {
+		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("cart");
+		boolean isSuccessful = false; 
+		if(request.getParameter("id")!=null && sc!=null) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			sc.deleteItem(id);
+		}
+		return isSuccessful;
 	}
 
 }
