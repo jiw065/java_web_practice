@@ -53,8 +53,11 @@ public class CartServlet extends HttpServlet {
 			
 			if(action.equals("update")) {
 				
-				this.updateItems(request, response);
-				request.getRequestDispatcher("/cart.jsp").forward(request, response);
+				if(this.updateItems(request, response)) {
+					request.getRequestDispatcher("/cart.jsp").forward(request, response);
+				}else {
+					request.getRequestDispatcher("/failure.jsp").forward(request, response);
+				}
 			}
 		
 		}
@@ -102,8 +105,12 @@ public class CartServlet extends HttpServlet {
 		boolean isSuccessful = false; 
 		if(request.getParameter("id")!=null && request.getParameter("number")!=null && sc!=null) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			int num = Integer.parseInt(request.getParameter("number"));			 
-			int itemNum = sc.getBoughtItem(id).getItemNum();
+			int num = Integer.parseInt(request.getParameter("number"));	
+			BoughtItem item =  sc.getBoughtItem(id);
+			if (item == null) {
+				return false;
+			}
+			int itemNum = item.getItemNum();
 			if (itemNum > num) { //delete
 				int n = itemNum - num; 
 				while(n>0) {
