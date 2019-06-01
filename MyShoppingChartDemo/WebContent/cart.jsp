@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <h1>My Shopping Chart</h1>
+   <h1>My Shopping Cart</h1>
    <a href="index.jsp">Item List</a>
    <hr> 
    <div id="shopping">
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     %>
 				
 			</table>
-			 <div class="total"><span id="total">Total: $<%=cart.sumItemPrice()%></span></div>
+			 <div class="total"><span id="total">Cart Subtotal: $<%=cart.sumItemPrice()%></span></div>
 			  <% 
 			    }
 			 %>

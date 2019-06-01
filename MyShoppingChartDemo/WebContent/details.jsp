@@ -132,6 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </tr> 
              </table>
              <div id="cart">
+              <a href="details.jsp" class="buyButton">Check out</a>
               <a href="javascript:selflog_show(<%=item.getId()%>)" class="buyButton">Add to Cart</a>
               <a href="servlet/CartServlet?action=show" class="buyButton">Go to Cart</a>
              </div>
