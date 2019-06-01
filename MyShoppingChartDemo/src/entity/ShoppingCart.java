@@ -47,8 +47,10 @@ public class ShoppingCart {
 	
 	public double sumItemPrice() {
 		ArrayList<BoughtItem> bl = this.getItemList();
+		this.sumPrice = 0;
 		if (bl != null) {
 			for (BoughtItem bi : bl) {
+				System.out.println(bi.getName()+" "+bi.getItemNum()+" "+bi.getPrice());
 				this.sumPrice += bi.getPrice()*bi.getItemNum();
 			}
 		}		
@@ -68,9 +70,6 @@ public class ShoppingCart {
 //    	sc.deleteItem(1);
 //    	sc.deleteItem(1);
 //    	System.out.println(sc.sumItemPrice()+" "+sc.getItemList().size());
-//    	ArrayList<BoughtItem> bi = sc.getItemList();
-//    	for(BoughtItem i:bi) {
-//    		System.out.println(i.getName()+" "+i.getItemNum()+" "+i.getPrice());
-//    	}
+//
 //    }
 }

@@ -15,9 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+
     <link type="text/css" rel="stylesheet" href="css/style1.css" />
     <script language="javascript">
 	    function delcfm() {
@@ -53,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				              				        
 				     %> 
 				<tr name="products" id="product_id_1">
-					<td class="thumb"><img src="images/<%=bi.getPicture()%>" /><a href=""><%=bi.getName()%></a></td>
+					<td class="thumb"><img src="images/<%=bi.getPicture()%>" /><a href="details.jsp?id=<%=bi.getId()%>"><%=bi.getName()%></a></td>
 					<td class="number"><%=bi.getPrice() %></td>
 					<td class="price" id="price_id_1">
 						<span><%=bi.getPrice()*bi.getItemNum() %></span>

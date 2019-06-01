@@ -65,22 +65,25 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	private boolean addIntoCart(HttpServletRequest request, HttpServletResponse response) {
-		ShoppingCart sc = new ShoppingCart();
+		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("cart");
+		if(sc==null) {
+			sc = new ShoppingCart();
+			request.getSession().setAttribute("cart", sc);
+		}
 		boolean isSuccessful = false; 
-		if(request.getParameter("id")!=null && request.getParameter("num")!=null) {
+		
+		if(request.getParameter("id")!=null && request.getParameter("num")!=null && sc!=null) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			int num = Integer.parseInt(request.getParameter("num"));			
 			while(num > 0) {
 				isSuccessful = sc.addItems(id);
-				System.out.println(isSuccessful);
-				num--;
-				
+				num--;				
 			}
-			
-	    	ArrayList<BoughtItem> bi = sc.getItemList();
+			ArrayList<BoughtItem> bi = sc.getItemList();
 	    	for(BoughtItem i:bi) {
 	    		System.out.println(i.getName()+" "+i.getItemNum()+" "+i.getPrice());
 	    	}
+	    	System.out.println(sc.sumItemPrice());
 			return isSuccessful;
 		}else {
 			return isSuccessful;
