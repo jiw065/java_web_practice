@@ -9,7 +9,7 @@ public class ShoppingCart {
 	
 	private double sumPrice;
 	private HashMap<Integer,BoughtItem> itemList; 
-	
+	private ItemsDAO idao = new ItemsDAO();
 	
 	public ShoppingCart() {
 		this.sumPrice = 0;
@@ -17,7 +17,9 @@ public class ShoppingCart {
 				
 	}
 	
-	public boolean addItems(Items item) {
+	public boolean addItems(int id) {
+		
+		Items item = idao.getItemsById(id);
 		if(itemList.containsKey(item.getId())) {
 			
 			BoughtItem b1 = itemList.get(item.getId());
@@ -26,11 +28,13 @@ public class ShoppingCart {
 			return itemList.replace(item.getId(), b1)==null ? false :true;
 		}else {
 			BoughtItem b2 = new BoughtItem(item);
-		    return itemList.put(item.getId(),b2)==null ? false :true; 
+			itemList.put(item.getId(),b2);
+		    return true; 
 		}		
 	}
 	
-	public boolean deleteItem(Items item) {
+	public boolean deleteItem(int id) {
+		Items item = idao.getItemsById(id);
 		BoughtItem bi = itemList.get(item.getId());
 		int num = bi.getItemNum();
 		if (num > 1) {
@@ -56,19 +60,17 @@ public class ShoppingCart {
     }
     //test 
 //    public static void main (String[] args) {
-//    	ItemsDAO idao = new ItemsDAO();
 //    	ShoppingCart sc = new ShoppingCart();
-//    	sc.addItems(idao.getItemsById(1));
-//    	sc.addItems(idao.getItemsById(1));
-//    	sc.addItems(idao.getItemsById(3));
-//    	sc.addItems(idao.getItemsById(2));
-//    	sc.deleteItem(idao.getItemsById(1));
-//    	sc.deleteItem(idao.getItemsById(1));
+//    	sc.addItems(1);
+//    	sc.addItems(1);
+//    	sc.addItems(3);
+//    	sc.addItems(2);
+//    	sc.deleteItem(1);
+//    	sc.deleteItem(1);
 //    	System.out.println(sc.sumItemPrice()+" "+sc.getItemList().size());
 //    	ArrayList<BoughtItem> bi = sc.getItemList();
 //    	for(BoughtItem i:bi) {
 //    		System.out.println(i.getName()+" "+i.getItemNum()+" "+i.getPrice());
 //    	}
 //    }
-    
 }

@@ -285,7 +285,7 @@ var resize = function()
 		    $(this).acls('xbtnover',true);
 		}).msout(function(){
 		    $(this).acls('xbtn');
-		}).click(cancel); $('txt',l).html(A().tit); crebtn( 'cbtn', '取 消', cancel );
+		}).click(cancel); $('txt',l).html(A().tit); crebtn( 'cbtn', 'Cancel', cancel );
 	};
 	
 	window.crebtn = function(i,t,f)
@@ -324,6 +324,6 @@ var resize = function()
 	<div class="bl"></div>
 	<div class="bc"></div>
 	<div id="br" class="br"></div>
-	<div id="throbber" style="position:absolute;visibility:hidden;">正在加载窗口内容，请稍等....</div>
+	<div id="throbber" style="position:absolute;visibility:hidden;">Loading now, please wait....</div>
 </body>
 </html>
