@@ -57,6 +57,10 @@ public class ShoppingCart {
 		return this.sumPrice;
 	}
 	
+	public BoughtItem getBoughtItem(int id) {
+		return itemList.get(id);	
+	}
+	
     public ArrayList<BoughtItem> getItemList() {
     	return new ArrayList<BoughtItem>(this.itemList.values());
     }

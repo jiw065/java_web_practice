@@ -51,9 +51,10 @@ public class CartServlet extends HttpServlet {
 			
 			}
 			
-			if(action.equals("delete")) {
-				String id = request.getParameter("id");
-			
+			if(action.equals("update")) {
+				
+				this.updateItems(request, response);
+				request.getRequestDispatcher("/cart.jsp").forward(request, response);
 			}
 		
 		}
@@ -96,12 +97,28 @@ public class CartServlet extends HttpServlet {
 	
 	}
 	
-	private boolean deleteItems(HttpServletRequest request, HttpServletResponse response) {
+	private boolean updateItems(HttpServletRequest request, HttpServletResponse response) {
 		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("cart");
 		boolean isSuccessful = false; 
-		if(request.getParameter("id")!=null && sc!=null) {
+		if(request.getParameter("id")!=null && request.getParameter("number")!=null && sc!=null) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			sc.deleteItem(id);
+			int num = Integer.parseInt(request.getParameter("number"));			 
+			int itemNum = sc.getBoughtItem(id).getItemNum();
+			if (itemNum > num) { //delete
+				int n = itemNum - num; 
+				while(n>0) {
+					isSuccessful = sc.deleteItem(id);
+					n--;
+				}
+			}else if(itemNum < num){// add
+				int n = num - itemNum;
+				while(n>0) {
+					isSuccessful = sc.addItems(id);
+					n--;
+				}
+			}else {
+				isSuccessful = true; 
+			}
 		}
 		return isSuccessful;
 	}

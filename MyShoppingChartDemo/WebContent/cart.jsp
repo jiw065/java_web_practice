@@ -35,15 +35,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       function sub(id)
       {
          var num = parseInt(document.getElementById("product_num_"+id).value);
-         if(num>1)
+         if(num>0)
          {
             document.getElementById("product_num_"+id).value = --num;
          }
       }
       function updateItemNum(id){
     	  var num = document.getElementById("product_num_"+id).value;
-    	  alert(num);
-    	  window.location.href = "http://www.w3schools.com";
+    	  var url = "<%=path%>/servlet/CartServlet?action=update&id="+id+"&number="+num;
+    	  
+    	  window.location.href = url;
       }
    </script>
   </head>
